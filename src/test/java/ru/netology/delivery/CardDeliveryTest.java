@@ -30,11 +30,11 @@ class CardDeliveryTest {
         String deliveryDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         Configuration.holdBrowserOpen = true;
 
-        $("[data-test-id=city] input").setValue("Минусинск");
+        $("[data-test-id=city] input").setValue("Москва");
 
         $("[data-test-id=date] input").doubleClick().sendKeys(Keys.DELETE);
         $("[data-test-id=date] input").setValue(deliveryDate);
-        $("[data-test-id=name] input").setValue("Тонкию Юлия");
+        $("[data-test-id=name] input").setValue("Тонких Юлия");
         $("[data-test-id=phone] input").setValue("+79999990000");
         $("[data-test-id=agreement] span").click();
         $(withText("Забронировать")).click();
