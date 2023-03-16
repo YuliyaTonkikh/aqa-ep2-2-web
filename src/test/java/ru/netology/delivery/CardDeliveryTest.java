@@ -28,7 +28,6 @@ class CardDeliveryTest {
     @DisplayName("Успешная отправка формы доставки карты")
     void successSubmitFormDelivery() {
         String deliveryDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        Configuration.holdBrowserOpen = true;
 
         $("[data-test-id=city] input").setValue("Абакан");
 
@@ -47,7 +46,6 @@ class CardDeliveryTest {
     @DisplayName("Ошибка при отправке формы доставки карты")
     void failedSubmitFormDelivery() {
         String deliveryDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        Configuration.holdBrowserOpen = true;
 
         $("[data-test-id=date] input").doubleClick().sendKeys(Keys.DELETE);
         $("[data-test-id=date] input").setValue(deliveryDate);
