@@ -19,14 +19,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CardDeliveryTest {
 
-    @BeforeEach
-    public void setUp() {
-        open("http://127.0.0.1:9999/");
-    }
-
     @Test
     @DisplayName("Успешная отправка формы доставки карты")
     public void shouldSendForm() {
+        Configuration.holdBrowserOpen = true;
+        open("http://127.0.0.1:9999/");
         String deliveryDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
         $("[data-test-id=city] input").setValue("Абакан");
@@ -45,6 +42,8 @@ class CardDeliveryTest {
     @Test
     @DisplayName("Ошибка при отправке формы доставки карты с пустым городом")
     public void shouldNotSendCity() {
+        Configuration.holdBrowserOpen = true;
+        open("http://127.0.0.1:9999/");
         String deliveryDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
         $("[data-test-id=date] input").doubleClick().sendKeys(Keys.DELETE);
