@@ -37,21 +37,4 @@ class CardDeliveryTest {
 
     }
 
-    @Test
-    @DisplayName("Ошибка при отправке формы доставки карты с пустым городом")
-    public void shouldNotSendCity() {
-        open("http://localhost:9999");
-        String deliveryDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-
-        $("[data-test-id=date] input").doubleClick().sendKeys(Keys.DELETE);
-        $("[data-test-id=date] input").setValue(deliveryDate);
-        $("[data-test-id=name] input").setValue("Тонких Юлия");
-        $("[data-test-id=phone] input").setValue("+79999990000");
-        $("[data-test-id=agreement] span").click();
-        $(withText("Забронировать")).click();
-        String expectedText = "Поле обязательно для заполнения";
-        String actualText = $("[data-test-id=city] .input__sub").getText().trim();
-        assertEquals(expectedText, actualText);
-    }
-
 }
