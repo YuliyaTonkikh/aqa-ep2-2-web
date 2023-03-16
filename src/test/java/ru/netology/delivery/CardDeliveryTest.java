@@ -51,9 +51,9 @@ class CardDeliveryTest {
         $("[data-test-id=phone] input").setValue("+79999990000");
         $("[data-test-id=agreement] span").click();
         $(withText("Забронировать")).click();
-        String expectedText = "Поле обязательно для заполнения";
-        String actualText = $("[data-test-id=city] .input__sub").getText().trim();
-        assertEquals(expectedText, actualText);
+        String actualText = $("[data-test-id=city] .input__sub").shouldHave(
+                Condition.text("Поле обязательно для заполнения")).getText().trim();
+
     }
 
 }
