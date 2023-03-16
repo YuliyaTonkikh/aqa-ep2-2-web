@@ -30,7 +30,7 @@ class CardDeliveryTest {
         String deliveryDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         Configuration.holdBrowserOpen = true;
 
-        $("[data-test-id=city] input").setValue("Москва");
+        $("[data-test-id=city] input").setValue("Абакан");
 
         $("[data-test-id=date] input").doubleClick().sendKeys(Keys.DELETE);
         $("[data-test-id=date] input").setValue(deliveryDate);
