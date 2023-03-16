@@ -18,15 +18,10 @@ import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CardDeliveryTest {
-
-    @BeforeEach
-    public void openPage() {
-        open("http://localhost:9999");
-    }
-
     @Test
     @DisplayName("Успешная отправка формы доставки карты")
-    void successSubmitFormDelivery() {
+    public void shouldSendForm() {
+        open("http://localhost:9999");
         String deliveryDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
         $("[data-test-id=city] input").setValue("Абакан");
@@ -43,8 +38,9 @@ class CardDeliveryTest {
     }
 
     @Test
-    @DisplayName("Ошибка при отправке формы доставки карты")
-    void failedSubmitFormDelivery() {
+    @DisplayName("Ошибка при отправке формы доставки карты с пустым городом")
+    public void shouldNotSendCity() {
+        open("http://localhost:9999");
         String deliveryDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
         $("[data-test-id=date] input").doubleClick().sendKeys(Keys.DELETE);
@@ -53,7 +49,6 @@ class CardDeliveryTest {
         $("[data-test-id=phone] input").setValue("+79999990000");
         $("[data-test-id=agreement] span").click();
         $(withText("Забронировать")).click();
-
         String expectedText = "Поле обязательно для заполнения";
         String actualText = $("[data-test-id=city] .input__sub").getText().trim();
         assertEquals(expectedText, actualText);
